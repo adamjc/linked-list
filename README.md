@@ -1,7 +1,7 @@
 # linked-list
 Linked lists in JavaScript. Internally uses an array to store the previous node, next node and element.
 
-## Installation
+## Testing
 ```
 npm install
 npm test
