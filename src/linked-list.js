@@ -7,8 +7,8 @@ var LinkedList = (function () {
 
     function LinkedList() {
         var nodes = [];
-        var firstNode = undefined;
-        var lastNode = undefined;
+        var firstNode;
+        var lastNode;
 
         this.addFirst = function (element) {
             var nextNode;
@@ -20,6 +20,10 @@ var LinkedList = (function () {
             var newNode = new Node(undefined, nextNode, element);
 
             nodes.push(newNode);
+
+            if (firstNode !== undefined) {
+                firstNode.previous = newNode;
+            }
 
             firstNode = newNode;
 
@@ -41,6 +45,10 @@ var LinkedList = (function () {
 
             nodes.push(newNode);
 
+            if (lastNode !== undefined) {
+                lastNode.next = newNode;
+            }
+
             lastNode = newNode;
 
             if (firstNode === undefined) {
@@ -51,19 +59,35 @@ var LinkedList = (function () {
         };
 
         this.removeFirst = function (element) {
-            var firstNode = nodes[firstIndex];
+            var nextNode;
+            var firstNodeIndex;
 
-            nodes.splice(firstIndex, 1);
+            if (firstNode !== undefined) {
+                nextNode = firstNode.next;
+                firstNodeIndex = nodes.indexOf(firstNode);
+                nodes.splice(firstNodeIndex, 1);
+                firstNode = nextNode;
 
-            firstIndex = firstNode.next;
+                return true;
+            }
+
+            return false;
         };
 
         this.removeLast = function (element) {
-            var lastNode = nodes[lastIndex];
+            var previousNode;
+            var lastNodeIndex;
 
-            nodes.splice(lastIndex, 1);
+            if (lastNode !== undefined) {
+                previousNode = lastNode.previous;
+                lastNodeIndex = nodes.indexOf(lastNode);
+                nodes.splice(lastNodeIndex, 1);
+                lastNode = previousNode;
 
-            lastIndex = lastNode.previous;
+                return true;
+            }
+
+            return false;
         };
 
         this.getFirst = function () {

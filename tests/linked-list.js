@@ -18,7 +18,7 @@ describe('linked-list', function () {
             text: 'bar',
             value: '2'
         };
-    })
+    });
 
     it('should be able to append an element', function () {
         linkedList.addLast(testObject).should.equal(true);
@@ -57,6 +57,6 @@ describe('linked-list', function () {
         linkedList.addFirst(testObject);
         linkedList.addFirst(testObjectTwo);
         linkedList.removeLast();
-        linkedList.getLast().should.equal(testObject);
+        linkedList.getLast().should.equal(testObjectTwo);
     });
 });
