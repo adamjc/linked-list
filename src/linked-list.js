@@ -7,25 +7,45 @@ var LinkedList = (function () {
 
     function LinkedList() {
         var nodes = [];
-        var firstIndex = 0;
-        var lastIndex = 0;
+        var firstNode = undefined;
+        var lastNode = undefined;
 
         this.addFirst = function (element) {
-            var newNode = new Node(undefined, firstIndex, element);
+            var nextNode;
+
+            if (firstNode !== undefined) {
+                nextNode = firstNode;
+            }
+
+            var newNode = new Node(undefined, nextNode, element);
 
             nodes.push(newNode);
 
-            firstIndex = nodes.length - 1;
+            firstNode = newNode;
+
+            if (lastNode === undefined) {
+                lastNode = firstNode;
+            }
+
+            return true;
         };
 
         this.addLast = function (element) {
-            var previousNode = this.getLast();
+            var previousNode;
 
-            var newNode = new Node(lastIndex, undefined, element);
+            if (lastNode !== undefined) {
+                previousNode = lastNode;
+            }
+
+            var newNode = new Node(previousNode, undefined, element);
 
             nodes.push(newNode);
 
-            lastIndex = nodes.length - 1;
+            lastNode = newNode;
+
+            if (firstNode === undefined) {
+                firstNode = lastNode;
+            }
 
             return true;
         };
@@ -47,8 +67,6 @@ var LinkedList = (function () {
         };
 
         this.getFirst = function () {
-            var firstNode = nodes[firstIndex];
-
             if (firstNode !== undefined) {
                 return firstNode.value;
             } else {
@@ -57,8 +75,6 @@ var LinkedList = (function () {
         };
 
         this.getLast = function () {
-            var lastNode = nodes[lastIndex];
-
             if (lastNode !== undefined) {
                 return lastNode.value;
             } else {

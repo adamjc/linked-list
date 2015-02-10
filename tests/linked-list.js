@@ -8,14 +8,16 @@ describe('linked-list', function () {
 
     beforeEach(function () {
         linkedList = new LinkedList();
+
         testObject = {
             text: 'foo',
             value: '1'
-        }
+        };
+
         testObjectTwo = {
             text: 'bar',
             value: '2'
-        }
+        };
     })
 
     it('should be able to append an element', function () {
